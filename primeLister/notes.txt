@@ -1,0 +1,9 @@
+Make a variable for the number we want to check up to
+prompt the user to fill the variable.
+Make an array for the primes.
+Loop from 1  to the number.
+make an array for divisble numbers.
+    loop from 1 to the iterator above (inclusive) modulating them.
+    if we can modulate without a remainder add it to the array for divisble numbers.
+check if the divisble array is 2 long if so add the number to the primes array.
+iterate through until you have done up to the number and log the listof primes. 

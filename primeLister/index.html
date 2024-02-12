@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Page Title</title>
+</head>
+<body>
+  <script>
+    // Your JavaScript goes here!
+   let numberToCheck;
+   const listOfPrimes=[];
+   numberToCheck = prompt("What number do you want to check?", "");
+   for(let i = 1; i <= numberToCheck; i++){
+    const listOfCheckednumbers=[];
+    for(let y = 1; y <= i; y++){
+        if((i%y)=== 0){
+            listOfCheckednumbers.push(y);
+        }
+    }
+    if(listOfCheckednumbers.length === 2){
+        listOfPrimes.push(i);
+    }
+   }
+   console.log(listOfPrimes);
+
+
+
+    
+  </script>
+</body>
+</html>
