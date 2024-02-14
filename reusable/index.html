@@ -1,23 +1,67 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-  <script src="indexScript.js" defer></script>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
+    <title>JS Page Load Events</title>
+    
 </head>
-<body style="color:white; background-color:black;">
-  <h1>
-    THE TITLE OF YOUR WEBPAGE
-  </h1>
-  <div id="container"></div>
-  <button id="btn">CLICK ME BABY</button>
+<body>
+    <ul id="language">
+        <li>HTML</li>
+        <li>CSS</li>
+        <li>JavaScript</li>
+        <li>TypeScript</li>
+    </ul>
+    <button id="btnStart">Start Observing</button>
+    <button id="btnStop">Stop Observing</button>
+    <button id="btnAdd">Add</button>
+    <button id="btnRemove">Remove the last child</button>
 
-  <div id="container">
-    <button id="1">Click Me</button>
-    <button id="2">Click Me</button>
-    <button id="3">Click Me</button>
-  </div>
-  
+    <script>
+        let list = document.querySelector('#language');
+        let btnAdd = document.querySelector('#btnAdd');
+        let btnRemove = document.querySelector('#btnRemove');
+        let btnStart = document.querySelector('#btnStart');
+        let btnStop = document.querySelector('#btnStop');
+
+        btnStop.disabled=true;
+
+        function log(mutations){
+            for(let mutation of mutations){
+                if (mutation.type === 'childList'){
+                    console.log(mutation);
+                }
+            }
+        }
+    let observer = new MutationObserver(log);
+
+    btnStart.addEventListener('click',function(){
+        observer.observe(list,{
+            childList:true
+        });
+        btnStart.disabled = true;
+        btnStop.disabled = false;
+    });
+
+    let counter = 1;
+    btnAdd.addEventListener("click",function(){
+        let item = document.createElement('li');
+        item.textContent = `Item ${counter++}`;
+
+        list.appendChild(item);
+    });
+    btnRemove.addEventListener("click", function(){
+        list.lastElementChild ?
+        list.removeChild(list.lastElementChild) :
+        console.log("Sorry no more child nodes to remove.");
+    });
+
+    btnStop.addEventListener("click", function(){
+        observer.disconnect();
+
+        btnStart.disabled = false;
+        btnStop.disabled = true;
+    });
+
+    </script>
 </body>
 </html>
